@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="welcomeScreen" class="welcome-overlay">
+      <div class="welcome-content">
+        <h1 id="typingText" class="fade-text">Memory Website</h1>
+        <p id="subText" class="fade-text-sub">A place to keep our stories.</p>
+        <button class="btn-open" onclick="enterWebsite()">Enter Our Story</button>
+      </div>
+    </div>
+
+    <div class="bg-fixed"></div>
+    <div class="star-overlay"></div>
+
+    <main id="mainContent" class="hidden-content">
+      <section class="hero active">
+        <div class="hero-content">
+          <h1>Us, in Time.</h1>
+          <p class="subtitle">Every moment together becomes our story.</p>
+
+          <div class="timer-wrapper">
+            <div class="time-segment">
+              <span id="days">00</span>
+              <span class="label">Days</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-segment">
+              <span id="hours">00</span>
+              <span class="label">Hours</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-segment">
+              <span id="minutes">00</span>
+              <span class="label">Minutes</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-segment">
+              <span id="seconds">00</span>
+              <span class="label">Seconds</span>
+            </div>
+          </div>
+
+          <button onclick="scrollToSection('playlist')" class="scroll-indicator" aria-label="Scroll Down">
+            <i class="fas fa-arrow-down"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- Creator page moved to creator.html to keep the main site clean for guests -->
+
+      <section id="reviews" class="section">
+        <div class="section-header reveal">
+          <h2>Food & Drink Reviews</h2>
+          <p>Share what we felt when trying new places and dishes.</p>
+        </div>
+
+        <div id="reviewsFeed" class="reviews-feed reveal">
+          <!-- Reviews rendered by reviews.js -->
+        </div>
+
+        <div class="reviews-actions reveal">
+          <button id="addSampleReview" class="btn-open">Add Sample Review</button>
+        </div>
+      </section>
+
+      <!-- Media modal (images & videos) -->
+      <div id="mediaModal" class="media-modal" aria-hidden="true">
+        <div class="media-modal-content">
+          <button class="modal-close" aria-label="Close" onclick="closeModal()">&times;</button>
+          <div id="mediaBody" class="media-body"></div>
+          <div class="modal-caption" id="mediaCaption"></div>
+        </div>
+      </div>
+
+      <section id="playlist" class="section">
+        <div class="section-header reveal">
+          <h2>Our Favorite Songs</h2>
+          <p>Melodies that always remind me of you</p>
+        </div>
+
+        <div class="track-list reveal">
+          <div id="track-perfect" class="track-item" onclick="playSong('perfect')">
+            <div class="track-icon"><i class="fas fa-play"></i></div>
+            <div class="track-info"><h3>Perfect</h3><p>Ed Sheeran</p></div>
+            <div class="track-duration">4:23</div>
+          </div>
+          <div id="track-thousand" class="track-item" onclick="playSong('thousand')">
+            <div class="track-icon"><i class="fas fa-play"></i></div>
+            <div class="track-info"><h3>A Thousand Years</h3><p>Christina Perri</p></div>
+            <div class="track-duration">4:45</div>
+          </div>
+          <div id="track-allofme" class="track-item" onclick="playSong('allofme')">
+            <div class="track-icon"><i class="fas fa-play"></i></div>
+            <div class="track-info"><h3>All of Me</h3><p>John Legend</p></div>
+            <div class="track-duration">4:29</div>
+          </div>
+          <div id="track-kotainitaksamatanpamu" class="track-item" onclick="playSong('kotainitaksamatanpamu')">
+            <div class="track-icon"><i class="fas fa-play"></i></div>
+            <div class="track-info"><h3>Kotaini Taksama Tanpamu</h3><p>Personal</p></div>
+            <div class="track-duration">3:40</div>
+          </div>
+          <div id="track-landslide" class="track-item" onclick="playSong('landslide')">
+            <div class="track-icon"><i class="fas fa-play"></i></div>
+            <div class="track-info"><h3>Landslide</h3><p>Fleetwood Mac</p></div>
+            <div class="track-duration">3:20</div>
+          </div>
+          <div id="track-lovingyou" class="track-item" onclick="playSong('lovingyou')">
+            <div class="track-icon"><i class="fas fa-play"></i></div>
+            <div class="track-info"><h3>Loving You On My Mind</h3><p>Chris Stapleton</p></div>
+            <div class="track-duration">4:00</div>
+          </div>
+          <div id="track-reinmein" class="track-item" onclick="playSong('reinmein')">
+            <div class="track-icon"><i class="fas fa-play"></i></div>
+            <div class="track-info"><h3>Rein Me In</h3><p>Sam Fender & Olivia Dean</p></div>
+            <div class="track-duration">3:30</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="stories" class="section">
+        <div class="section-header reveal">
+          <h2>Our Story Timeline</h2>
+          <p>From the simple "hi" to the meaningful "stay", this is our favorite timeline.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-box left reveal">
+            <div class="date-badge">10 Jan 2023</div>
+            <div class="box-content">
+              <h3><i class="fas fa-comments"></i> First Notification</h3>
+              <p>It started with a reply or a short message — a little awkward, but that notification marked the start of something beautiful.</p>
+            </div>
+          </div>
+
+          <div class="timeline-box right reveal">
+            <div class="date-badge">14 Feb 2023</div>
+            <div class="box-content">
+              <h3><i class="fas fa-coffee"></i> First Face-to-Face</h3>
+              <p>My heart raced. At that coffee shop, I saw your smile in person for the first time — and I wanted to see it every day after.</p>
+            </div>
+          </div>
+
+          <div class="timeline-box left reveal">
+            <div class="date-badge">20 Feb 2023</div>
+            <div class="box-content">
+              <h3><i class="fas fa-heart"></i> We Began</h3>
+              <p>No longer "me" and "you", but "us". The day we promised to care, understand, and walk together — a date that's our little secret.</p>
+            </div>
+          </div>
+
+          <div class="timeline-box right reveal">
+            <div class="date-badge">15 May 2023</div>
+            <div class="box-content">
+              <h3><i class="fas fa-moon"></i> Late Night Conversations</h3>
+              <p>That night we talked about dreams, fears, and the future until dawn. I realized you're not just a partner, but a home.</p>
+            </div>
+          </div>
+
+          <div class="timeline-box left reveal">
+            <div class="date-badge">10 Aug 2023</div>
+            <div class="box-content">
+              <h3><i class="fas fa-plane-departure"></i> First Adventure</h3>
+              <p>Sunsets, waves, and our laughter. This trip taught me that the companion matters more than the destination.</p>
+            </div>
+          </div>
+
+          <div class="timeline-box right reveal">
+            <div class="date-badge">12 Dec 2023</div>
+            <div class="box-content">
+              <h3><i class="fas fa-gift"></i> Growing Older Together</h3>
+              <p>Blowing out candles next to you felt different. My simple wish: that in the years to come, it's your face I see when I wake on my happiest days.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header reveal">
+          <h2>Beautiful Moments</h2>
+        </div>
+        <div class="gallery-container reveal">
+          <div class="polaroid rotate-left">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop" alt="Photo 1" />
+            <div class="caption">Silly Us</div>
+          </div>
+          <div class="polaroid rotate-right">
+            <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=600&auto=format&fit=crop" alt="Photo 2" />
+            <div class="caption">Sunset Together</div>
+          </div>
+          <div class="polaroid rotate-left">
+            <img src="https://images.unsplash.com/photo-1621621667797-e06afc217fb0?w=600&auto=format&fit=crop" alt="Photo 3" />
+            <div class="caption">Favorite Place</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section closing-section reveal">
+        <div class="closing-content">
+          <h2 class="gradient-text-big">Every memory we make<br />is kept here,<br /><span class="highlight-pink">forever</span></h2>
+
+          <div class="glow-box">
+            <i class="fas fa-heart heart-beat" id="loveIcon" onclick="createHeartShower()"></i>
+            <p>Thank you for being part of my life. Every moment with you is a priceless gift.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>Made with all my heart, for you.</p>
+      </footer>
+    </main>
+
+    <div class="music-floater" id="playerBar">
+      <div class="floater-info">
+        <div class="equalizer"><span></span><span></span><span></span></div>
+        <span id="currentSongTitle" class="song-title">Select a song...</span>
+      </div>
+      <button onclick="toggleMusic()" class="btn-control" aria-label="Play Music">
+        <i class="fas fa-play" id="mainPlayIcon"></i>
+      </button>
+    </div>
+
+    <audio id="myAudio" loop>
+      <source src="myAudio/lagu-kotainitaksamatanpamu.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="script.js"></script>
+    <script src="reviews.js"></script>
+  </body>
+</html>

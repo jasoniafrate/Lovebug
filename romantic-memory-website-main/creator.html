@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Creator — Our Journey</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main style="padding:40px; max-width:900px; margin:0 auto;">
+      <h1 style="font-family:var(--font-heading);">Creator</h1>
+      <p style="color:var(--text-gray)">This page is for you and your partner to add posts. Enter the passcode to continue.</p>
+
+      <div id="gate">
+        <input id="creatorPass" type="password" placeholder="Enter passcode" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text-white);" />
+        <button id="unlockBtn" class="btn-open" style="margin-left:10px;">Unlock</button>
+      </div>
+
+      <div id="creatorArea" style="display:none;margin-top:20px;">
+        <form id="creatorForm" class="creator-form">
+          <input type="text" id="postTitle" placeholder="Title" required />
+          <textarea id="postText" placeholder="Write a short note or review..."></textarea>
+          <input type="url" id="postMediaUrl" placeholder="Media URL (optional)" />
+          <div class="file-row">
+            <label for="postMediaFile">Or upload a file (image/video):</label>
+            <input type="file" id="postMediaFile" accept="image/*,video/*" />
+          </div>
+          <div class="creator-actions">
+            <button type="submit" class="btn-open">Create Post</button>
+          </div>
+          <p class="small-note">Posts are saved to your browser. To sync across devices, see README for optional backend setup.</p>
+        </form>
+        <div style="margin-top:20px;">
+          <a href="index.html" class="btn-open">Back to Home</a>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Simple client-side passcode gate. Replace 'anniversary' with your secret phrase.
+      const PASSCODE = 'anniversary';
+      document.getElementById('unlockBtn').addEventListener('click', ()=>{
+        const val = document.getElementById('creatorPass').value;
+        if (val === PASSCODE) {
+          document.getElementById('gate').style.display = 'none';
+          document.getElementById('creatorArea').style.display = 'block';
+        } else {
+          alert('Incorrect passcode');
+        }
+      });
+    </script>
+
+    <script src="reviews.js"></script>
+  </body>
+</html>
