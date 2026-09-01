@@ -6,6 +6,17 @@ if (!reviews) {
   localStorage.setItem(reviewsKey, JSON.stringify(reviews));
 }
 
+// Optional Supabase initialization: if you create `config.js` with
+// `window.SUPABASE_URL` and `window.SUPABASE_ANON_KEY`, `supabase.js` will
+// initialize and `pushReviewToSupabase` will be available.
+if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+  try {
+    if (typeof initSupabase === 'function') initSupabase();
+  } catch (e) {
+    console.log('Supabase init not available yet:', e);
+  }
+}
+
 const sampleReviews = [
   {
     id: 'r1',
@@ -158,6 +169,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
         reviews.push(item);
         saveReviews();
         renderReviews();
+        // If Supabase sync function is available, push the new review there too
+        try {
+          if (typeof pushReviewToSupabase === 'function') {
+            pushReviewToSupabase({ id: item.id, title: item.title, text: item.text, media: item.media, media_type: item.mediaType, rating: item.rating, date: item.date }).catch(err=>console.error('Supabase push error', err));
+          }
+        } catch(e) {
+          console.log('Supabase push not available', e);
+        }
         creatorForm.reset();
       };
 
