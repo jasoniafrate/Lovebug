@@ -21,8 +21,8 @@ const sampleReviews = [
   {
     id: 'r1',
     title: 'Boba Baba',
-    text: 'Jason tried Boba for the first time (funny reaction). Overall a great experience and introduction to boba! The milk and fruit teas were both good, maybe a bit too sweet but still recommend trying!',
-    media: 'myAudio/boba.MOV',
+    text: 'Jason tried Boba for the first time (funny reaction). Overall a great experience and introduction to boba!',
+    media: 'https://www.youtube.com/watch?v=aHlA_Qqq7FU',
     mediaType: 'video',
     rating: null,
     date: '2025-12-23'
@@ -30,8 +30,8 @@ const sampleReviews = [
   {
     id: 'r2',
     title: 'Trying Tanghulu in Chicago',
-    text: 'Found a shop in Chinatown that had tanghulu, and we had to try it. It was a fun experience, but the sugar coating felt like eating glass. Still, a fun moment and decent taste.',
-    media: 'myAudio/tangu.MOV',
+    text: 'Found a shop in Chinatown that had tanghulu — a fun moment and decent taste.',
+    media: 'https://www.youtube.com/watch?v=Z5Zrmv6MNl0',
     mediaType: 'video',
     rating: null,
     date: '2026-02-21'
@@ -52,17 +52,26 @@ function renderReviews() {
     const card = document.createElement('div');
     card.className = 'review-card';
 
-    const media = document.createElement(r.mediaType === 'video' ? 'video' : 'img');
-    media.className = 'review-media';
+    // Render image or video thumbnail (YouTube-friendly)
+    let media;
     if (r.mediaType === 'video') {
-      media.src = r.media;
-      media.controls = false;
-      media.setAttribute('playsinline','');
+      media = document.createElement('img');
+      media.className = 'review-media video-thumb';
+      const ytId = getYouTubeId(r.media);
+      if (ytId) {
+        media.src = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+      } else {
+        // fallback to the provided URL
+        media.src = r.media;
+      }
+      media.onclick = () => openModal(r);
     } else {
+      media = document.createElement('img');
+      media.className = 'review-media';
       media.src = r.media;
       media.alt = r.title || '';
+      media.onclick = () => openModal(r);
     }
-    media.onclick = () => openModal(r);
 
     const title = document.createElement('div');
     title.className = 'review-title';
@@ -120,11 +129,22 @@ function openModal(item) {
   body.innerHTML = '';
   caption.innerText = '';
   if (item.mediaType === 'video') {
-    const v = document.createElement('video');
-    v.src = item.media;
-    v.controls = true;
-    v.autoplay = true;
-    body.appendChild(v);
+    const ytId = getYouTubeId(item.media);
+    if (ytId) {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
+      iframe.width = '100%';
+      iframe.height = '480';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      body.appendChild(iframe);
+    } else {
+      const v = document.createElement('video');
+      v.src = item.media;
+      v.controls = true;
+      v.autoplay = true;
+      body.appendChild(v);
+    }
   } else {
     const i = document.createElement('img');
     i.src = item.media;
@@ -134,6 +154,20 @@ function openModal(item) {
   caption.innerText = item.title + (item.text ? ' — ' + item.text : '');
   modal.classList.add('show');
   modal.setAttribute('aria-hidden', 'false');
+}
+
+// YouTube helpers
+function getYouTubeId(url) {
+  if (!url || typeof url !== 'string') return null;
+  // common patterns: youtube.com/watch?v=ID, youtu.be/ID, youtube.com/embed/ID
+  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  if (m && m[1]) return m[1];
+  try {
+    const u = new URL(url);
+    return u.searchParams.get('v');
+  } catch (e) {
+    return null;
+  }
 }
 
 function closeModal() {
