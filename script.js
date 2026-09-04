@@ -57,7 +57,7 @@ function enterWebsite() {
   }, 800);
 }
 
-const startDate = new Date("2023-02-14T00:00:00").getTime();
+const startDate = new Date("2025-09-06T00:00:00").getTime();
 
 function updateTimer() {
   const now = new Date().getTime();

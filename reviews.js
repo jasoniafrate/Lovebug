@@ -22,7 +22,7 @@ const sampleReviews = [
     id: 'r1',
     title: 'Corner Coffee Shop',
     text: 'Great espresso, warm vibe. Highly recommended! 🎉',
-    media: 'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=1200&auto=format&fit=crop',
+    media: 'myAudio/chicago.JPEG',
     mediaType: 'image',
     rating: null,
     date: '2023-08-10'
@@ -31,8 +31,8 @@ const sampleReviews = [
     id: 'r2',
     title: 'Late Night Nasi Goreng',
     text: 'Portion and flavor were perfect — great late-night dinner.',
-    media: 'https://www.w3schools.com/html/mov_bbb.mp4',
-    mediaType: 'video',
+    media: 'myAudio/formal.JPG',
+    mediaType: 'image',
     rating: null,
     date: '2023-11-02'
   }
