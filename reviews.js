@@ -19,6 +19,31 @@ if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
 
 // No sample reviews — use reviews stored in localStorage or added via Creator
 
+// If there are no stored reviews yet, seed with the two posts you created
+if ((!reviews || reviews.length === 0)) {
+  reviews = [
+    {
+      id: 'seed-1',
+      title: 'Boba Baba',
+      text: 'Jason tried Boba for the first time (funny reaction). Overall a great experience and introduction to boba!',
+      media: 'https://www.youtube.com/watch?v=aHlA_Qqq7FU',
+      mediaType: 'video',
+      rating: null,
+      date: '2025-12-23'
+    },
+    {
+      id: 'seed-2',
+      title: 'Trying Tanghulu in Chicago',
+      text: 'Found a shop in Chinatown that had tanghulu — a fun moment and decent taste.',
+      media: 'https://www.youtube.com/watch?v=Z5Zrmv6MNl0',
+      mediaType: 'video',
+      rating: null,
+      date: '2026-02-21'
+    }
+  ];
+  saveReviews();
+}
+
 function saveReviews() {
   localStorage.setItem(reviewsKey, JSON.stringify(reviews));
 }
