@@ -20,21 +20,21 @@ if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
 const sampleReviews = [
   {
     id: 'r1',
-    title: 'Corner Coffee Shop',
-    text: 'Great espresso, warm vibe. Highly recommended! 🎉',
-    media: 'myAudio/chicago.JPEG',
-    mediaType: 'image',
+    title: 'Boba Baba',
+    text: 'Jason tried Boba for the first time (funny reaction). Overall a great experience and introduction to boba! The milk and fruit teas were both good, maybe a bit too sweet but still recommend trying!',
+    media: 'myAudio/boba.MOV',
+    mediaType: 'video',
     rating: null,
-    date: '2023-08-10'
+    date: '2025-12-23'
   },
   {
     id: 'r2',
-    title: 'Late Night Nasi Goreng',
-    text: 'Portion and flavor were perfect — great late-night dinner.',
-    media: 'myAudio/formal.JPG',
-    mediaType: 'image',
+    title: 'Trying Tanghulu in Chicago',
+    text: 'Found a shop in Chinatown that had tanghulu, and we had to try it. It was a fun experience, but the sugar coating felt like eating glass. Still, a fun moment and decent taste.',
+    media: 'myAudio/tangu.MOV',
+    mediaType: 'video',
     rating: null,
-    date: '2023-11-02'
+    date: '2026-02-21'
   }
 ];
 
