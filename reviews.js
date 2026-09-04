@@ -17,26 +17,7 @@ if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
   }
 }
 
-const sampleReviews = [
-  {
-    id: 'r1',
-    title: 'Boba Baba',
-    text: 'Jason tried Boba for the first time (funny reaction). Overall a great experience and introduction to boba!',
-    media: 'https://www.youtube.com/watch?v=aHlA_Qqq7FU',
-    mediaType: 'video',
-    rating: null,
-    date: '2025-12-23'
-  },
-  {
-    id: 'r2',
-    title: 'Trying Tanghulu in Chicago',
-    text: 'Found a shop in Chinatown that had tanghulu — a fun moment and decent taste.',
-    media: 'https://www.youtube.com/watch?v=Z5Zrmv6MNl0',
-    mediaType: 'video',
-    rating: null,
-    date: '2026-02-21'
-  }
-];
+// No sample reviews — use reviews stored in localStorage or added via Creator
 
 function saveReviews() {
   localStorage.setItem(reviewsKey, JSON.stringify(reviews));
@@ -234,13 +215,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
     });
   }
-  const addBtn = document.getElementById('addSampleReview');
-  if (addBtn) addBtn.onclick = () => {
-    // push a sample review then render
-    reviews = reviews.concat(sampleReviews.map(s=> ({...s, id: s.id + '-' + Date.now()})));
-    saveReviews();
-    renderReviews();
-  };
+  // no sample button handler (we use stored reviews)
   renderReviews();
   // close modal when clicking outside content
   const modal = document.getElementById('mediaModal');
