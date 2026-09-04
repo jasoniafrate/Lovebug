@@ -1,5 +1,5 @@
 const welcomeTexts = [
-  { main: "Memory Website", sub: "A place to keep our stories." },
+  { main: "Serena & Jason", sub: "A place to keep our stories." },
   { main: "For Our Special Moments", sub: "All our little memories saved here." },
   { main: "For You and Me", sub: "Thank you for being part of my life." }
 ];
